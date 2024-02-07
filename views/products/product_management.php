@@ -2,6 +2,7 @@
 <head>
     <title>Gestione prodotti</title>
     <link rel="stylesheet" href="../../CSS/management.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -76,10 +77,10 @@ if($current_user->getRoleId() != 2){
         </tr>
         <tr>
             <td>
-                <input type="text" name="nome" placeholder="Enter the product name">
+                <input type="text" name="nome" id="nome" placeholder="Enter the product name" onkeyup="cercaParole()">
             </td>
             <td>
-                <input type="text" name="marca" placeholder="Enter the brand">
+                <input type="text" name="marca" id="marca" placeholder="Enter the brand" onkeyup="cercaParole()">
             </td>
             <td>
                 <select name="action">
@@ -92,25 +93,22 @@ if($current_user->getRoleId() != 2){
     <input type="submit" name="search" value="Submit">
 </form>
 
-<?php
-$products = Product::fetchAll();
-?>
+<div id="suggerimenti"></div>
 
-<table class="styled-table">
-    <tr>
-        <td><b><label for="nome">Nome</label></b></td>
-        <td><b><label for="marca">Marca</label></b></td>
-        <td><b><label for="prezzo">Prezzo</label></b></td>
-    </tr>
-    <?php foreach ($products as $product) { ?>
-<tr>
-    <td><?php echo $product->getNome() ?></td>
-    <td><?php echo $product->getMarca() ?></td>
-    <td><?php echo $product->getPrezzo() ?></td>
-</tr>
-<?php } ?>
-</table>
-
+<script>
+    function cercaParole() {
+        var parola = $('#nome').val();
+        var marca = $('#marca').val();
+        $.ajax({
+            type: 'POST',
+            url: '../../ajax/search_words.php',
+            data: { nome: parola, marca: marca },
+            success: function (data) {
+                $('#suggerimenti').html(data);
+            }
+        });
+    }
+</script>
 <a href="index.php">Torna indietro</a>
 
 </body>
