@@ -8,6 +8,7 @@
 <?php
 require_once '../../dbmanager.php';
 require_once '../../dto/Product.php';
+require_once '../../dto/User.php';
 
 session_start();
 
@@ -15,6 +16,11 @@ $current_user = $_SESSION['current_user'];
 
 if (!$current_user) {
     header("Location: http://localhost:8000/views/login.php");
+    exit();
+}
+
+if($current_user->getRoleId() != 2){
+    header("Location: http://localhost:8000/views/products/product_managememt");
     exit();
 }
 

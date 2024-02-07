@@ -21,12 +21,9 @@ if (isset($_POST['nome']) && isset($_POST['prezzo']) && isset($_POST['marca'])) 
     $product = Product::find($_POST['id']);
     $product->update($params);
 
-    header('Location: http://localhost:8000/views/products/product_management');
+    header('Location: http://localhost:8000/views/products/product_management.php');
     exit;
 } else {
     echo "Errore: Compila tutti i campi per inserire un nuovo prodotto.";
 }
-
-
-
 ?>

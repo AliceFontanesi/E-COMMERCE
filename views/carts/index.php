@@ -35,7 +35,7 @@ $line_items = CartProducts::fetchAll($current_user);
             <li>
                 <input type="number" name="quantita" value="<?php echo $line->getQuantita(); ?>" placeholder="Quantità">
             </li>
-            <li><?php echo $totPrezzo = intval($line->getProduct()->getPrezzo()) * $line->getQuantita(); ?></li>
+            <li><?php echo $totPrezzo = floatval($line->getProduct()->getPrezzo()) * $line->getQuantita(); ?></li>
             <?php $totale += $totPrezzo ?>
         </ul>
         <input type="hidden" name="id" value="<?php echo $line->getProduct()->getId(); ?>">

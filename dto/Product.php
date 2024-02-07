@@ -70,9 +70,6 @@ class Product {
             $deleteCartProductsStmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
             $deleteCartProductsStmt->execute();
 
-            $deleteCartStmt = $conn->prepare("DELETE FROM ecommerce5E.carts WHERE id IN (SELECT cart_id FROM ecommerce5E.cart_products WHERE product_id = :product_id)");
-            $deleteCartStmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
-            $deleteCartStmt->execute();
 
             $deleteProductStmt = $conn->prepare("DELETE FROM ecommerce5E.products WHERE id = :product_id");
             $deleteProductStmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);

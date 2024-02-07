@@ -20,7 +20,7 @@ if (!empty($_POST['nome']) && !empty($_POST['prezzo']) && !empty($_POST['marca']
 
     Product::create($params);
 
-    header('Location: http://localhost:8000/views/products/index.php');
+    header('Location: http://localhost:8000/views/products/product_management.php');
     exit;
 } else {
     echo "Errore: Compila tutti i campi per inserire un nuovo prodotto.";
