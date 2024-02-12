@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-
-if (isset($_SESSION['current_user'])) {
-    header("Location: http://localhost:8000/views/products/index.php");
-    exit();
-}
-?>
-
 <html>
 <head>
     <title>Login</title>

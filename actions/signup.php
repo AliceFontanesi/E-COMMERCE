@@ -12,6 +12,12 @@ if(empty($email) || empty($password) || empty($password_confirmation)){
     exit;
 }
 
+$user = User::find_user($email);
+var_dump($user);
+if($user){
+    header('Location: http://localhost:8000/views/signup.php');
+    exit;
+}
 
 if (strcmp($password, $password_confirmation) != 0) {
     header('Location: http://localhost:8000/views/signup.php');
@@ -20,18 +26,6 @@ if (strcmp($password, $password_confirmation) != 0) {
 
 $db = new DbManager('localhost', 3306, 'C:\Users\USER\Desktop\E-COMMERCE\file.txt');
 $ecommerce = $db->connect('ecommerce5E');
-
-/*$sql = $ecommerce->prepare("SELECT id FROM users WHERE email=:email LIMIT 1");
-
-$sql->bindParam(":email", $email);
-$sql->execute();
-
-$users = $sql->fetchAll();
-
-if (count($users) > 0) {
-    header('Location: http://localhost:8000/views/signup.php');
-    exit;
-}*/
 
 $sql = $ecommerce->prepare("insert into users (email,password,role_id) values (:email,SHA2(:password, 256),1);");
 $sql->bindParam(":email", $email);

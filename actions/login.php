@@ -4,15 +4,6 @@ require_once '../dbmanager.php';
 require_once '../dto/User.php';
 require_once '../dto/Session.php';
 
-session_start();
-
-$current_user = $_SESSION['current_user'];
-
-if ($current_user) {
-    header("Location: http://localhost:8000/views/products/index.php");
-    exit();
-}
-
 $email = $_POST['email'];
 $password = $_POST["password"];
 

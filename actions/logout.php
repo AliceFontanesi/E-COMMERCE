@@ -13,6 +13,7 @@ $sessione = Session::find($current_session_id);
 
 $sessione->delete();
 
+session_destroy();
 $_SESSION['current_user'] = null;
 
 header("Location: http://localhost:8000/views/login.php");

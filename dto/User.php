@@ -56,6 +56,26 @@ class User
             die("\nErrore nella ricerca dell'elemento: " . $e->getMessage());
         }
     }
+
+    public static function find_user($email)
+    {
+        $db = new DbManager('localhost', 3306, 'C:\Users\USER\Desktop\E-COMMERCE\file.txt');
+        $pdo = $db->connect('ecommerce5E');
+
+        $query = "SELECT * FROM users WHERE email = :email";
+        try
+        {
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $record = $stmt->fetchObject(__CLASS__);
+            return $record;
+        }
+        catch(PDOException $e)
+        {
+            die("\nErrore nella ricerca dell'elemento: " . $e->getMessage());
+        }
+    }
 }
 
 ?>
